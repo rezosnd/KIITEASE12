@@ -1,40 +1,40 @@
-"use client"
+"use client";
 
-import { useSession, signIn, signOut } from "next-auth/react"
-import { useRouter } from "next/navigation"
-import { useToast } from "@/components/ui/use-toast"
+import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 export function useAuth() {
-  const { data: session, status } = useSession()
-  const router = useRouter()
-  const { toast } = useToast()
+  const { data: session, status } = useSession(); // Always returns { data, status }
+  const router = useRouter();
+  const { toast } = useToast();
 
-  const user = session?.user
-  const isAuthenticated = !!user
-  const isLoading = status === "loading"
-  const isPremium = user?.role === "premium" || user?.role === "admin"
-  const isAdmin = user?.role === "admin"
+  const user = session?.user;
+  const isAuthenticated = status === "authenticated";
+  const isLoading = status === "loading";
+  const isPremium = user?.role === "premium" || user?.role === "admin";
+  const isAdmin = user?.role === "admin";
 
   const login = async () => {
     try {
-      await signIn("google", { callbackUrl: "/" })
+      await signIn("google", { callbackUrl: "/" });
     } catch (error) {
-      console.error("Login error:", error)
+      console.error("Login error:", error);
       toast({
         title: "Login failed",
         description: "There was a problem signing in with Google.",
         variant: "destructive",
-      })
+      });
     }
-  }
+  };
 
   const logout = async () => {
     try {
-      await signOut({ callbackUrl: "/" })
+      await signOut({ callbackUrl: "/" });
     } catch (error) {
-      console.error("Logout error:", error)
+      console.error("Logout error:", error);
     }
-  }
+  };
 
   const upgradeAccount = async () => {
     if (!isAuthenticated) {
@@ -42,13 +42,12 @@ export function useAuth() {
         title: "Authentication required",
         description: "Please login to upgrade your account.",
         variant: "destructive",
-      })
-      router.push("/login")
-      return
+      });
+      router.push("/login");
+      return;
     }
-
-    router.push("/premium")
-  }
+    router.push("/premium");
+  };
 
   return {
     user,
@@ -59,5 +58,6 @@ export function useAuth() {
     login,
     logout,
     upgradeAccount,
-  }
+  };
 }
+
