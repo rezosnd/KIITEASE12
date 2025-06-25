@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { useAuth } from "@/hooks/use-auth"; // Must be a named export from hooks/use-auth.ts
+import { useAuth } from "@/hooks/use-auth"; // Fixed import path
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export function Navbar() {
+export default function Navbar() { // Changed to default export
   const { user, logout, isAuthenticated, isPremium, isAdmin } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -190,4 +190,5 @@ export function Navbar() {
     </nav>
   );
 }
+
 
