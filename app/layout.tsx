@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Footer } from "@/components/footer";
 import { CookieConsent } from "@/components/cookie-consent";
-import { CustomCursor } from "@/components/custom-cursor";
+import  CustomCursor  from "@/components/custom-cursor";
 
 // Google font setup
 const inter = Inter({ subsets: ["latin"] });
