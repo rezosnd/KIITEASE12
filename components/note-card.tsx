@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { FileText, Download, Calendar, User, Lock } from "lucide-react"
-import { useAuth } from "@/components/auth-provider"
+import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/components/ui/use-toast"
 import { motion } from "framer-motion"
 
